@@ -1,0 +1,39 @@
+---
+# tasks file for test-role
+- name: users
+  become: true
+  hosts: webservers
+  vars_files:
+    - ../vars/main.yml
+
+  tasks:
+  - name: create users
+    user:
+      name: "{{ item.name }}"
+      comment: "{{ item.comment }}"
+      group: users
+      expires: -1
+      state: present
+    loop: "{{ users }}"
+
+  - name: create .ssh directories
+    file:
+      path: "/home/{{ item.name }}/.ssh"
+      owner: "{{ item.name }}"
+      group: users
+      mode: 0700
+      state: directory
+    loop: "{{ users }}"
+
+  - name: create authorized keys
+    copy:
+      src: "../files/{{ item.name }}.pub"
+      dest: "/home/{{ item.name }}/.ssh/authorized_keys"
+      owner: "{{ item.name }}"
+      group: users
+      mode: 0600
+    loop: "{{ users }}"
+
+  - name: chage user
+    shell: chage -I -1 -m 99999 -M -1 -W -1 -E -1 "{{ item.name }}"
+    loop: "{{ users }}"

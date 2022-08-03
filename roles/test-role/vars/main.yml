@@ -1,0 +1,7 @@
+---
+# vars file for test-role
+users:
+  - name: jsnow
+    comment: Jon Snow
+  - name: nstark
+    comment: Ned Stark
