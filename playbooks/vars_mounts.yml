@@ -1,0 +1,4 @@
+fsx_instances:
+  - { mount_point: "/mnt/fsx1", fsx_path: "fs-0123456789abcdef0.fsx.us-east-1.amazonaws.com:/fsx1" }
+  - { mount_point: "/mnt/fsx2", fsx_path: "fs-0abcdef1234567890.fsx.us-east-1.amazonaws.com:/fsx2" }
+  - { mount_point: "/mnt/fsx3", fsx_path: "fs-0fedcba9876543210.fsx.us-west-2.amazonaws.com:/fsx3" }
